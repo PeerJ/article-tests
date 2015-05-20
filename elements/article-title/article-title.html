@@ -1,0 +1,53 @@
+<link rel="import" href="../../bower_components/polymer/polymer.html">
+
+<polymer-element name="article-title" parameters="article">
+  <template>
+    <link rel="stylesheet" href="article-title.css">
+
+    <article-test>
+      <h1>Article Title</h1>
+
+      <ul class="description">
+        <li>
+          <span id="output">{{ capitalisation }}</span>
+          <span target="h1[itemprop=name]" link?="{{ finished }}"
+            on-tap="{{ showTarget }}">Verify that the title is correctly capitalised</span>
+        </li>
+      </ul>
+    </article-test>
+  </template>
+  <script>
+    Polymer({
+      capitalisation: '…',
+      finished: false,
+      run: function() {
+        var title = $('h1[itemprop=name]', this.article).text();
+
+        this.capitalisation = this.testCapitalisation(title) ? '✔' : '⚠';
+        this.finished = true;
+      },
+      testCapitalisation: function(title) {
+        // test for all caps
+        if (!/[a-z]/.test(title)) {
+          return false;
+        }
+
+        // test for sentence case
+        var words = title.split(/\s+/);
+
+        var capitalisedWords = words.filter(function(word) {
+          return /^[A-Z]/.test(word);
+        });
+
+        return (capitalisedWords.length / words.length) < 0.5;
+      },
+      showTarget: function(event, details, sender) {
+        event.preventDefault();
+
+        var target = sender.getAttribute('target');
+        var node = $(target, this.article).addClass('highlight');
+        node.get(0).scrollIntoView();
+      }
+    });
+  </script>
+</polymer-element>

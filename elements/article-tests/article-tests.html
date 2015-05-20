@@ -1,0 +1,57 @@
+<link rel="import" href="../../bower_components/polymer/polymer.html">
+
+<polymer-element name="article-tests" attributes="url">
+  <template>
+    <link rel="stylesheet" media="screen" href="https://peerj.github.io/paper-themes/paper-now/screen.css">
+    <link rel="stylesheet" href="article-tests.css">
+
+    <div id="sidebar">
+      <template if="{{ loaded }}">
+        <div>
+          <paper-button on-tap="{{ runTests }}" raised>Run tests</paper-button>
+        </div>
+
+        <div layout vertical>
+          <article-title class="test" article="{{ article }}"></article-title>
+        </div>
+      </template>
+    </div>
+
+    <div id="content" layout vertical>
+      <div id="input" layout horizontal>
+        <paper-input flex value="{{ url }}" label="Article URL"></paper-input>
+        <template if="{{ !loaded }}">
+          <div>
+            <paper-button on-tap="{{ fetchArticle }}" raised>Load article</paper-button>
+          </div>
+        </template>
+      </div>
+      <div id="article"></div>
+    </div>
+  </template>
+  <script>
+    (function () {
+      Polymer({
+        url: 'http://git.macropus.org/collapse-largest-herbivores/',
+        ready: function() {
+          //this.fetchArticle();
+        },
+        fetchArticle: function() {
+          //$(this.$.article).load(this.url, 'article', this.runTests.bind(this));
+          $(this.$.article).load(this.url, 'article', function() {
+            this.loaded = true;
+          }.bind(this));
+        },
+        runTests: function() {
+          var article = $('article', this.$.article).get(0);
+
+          this.results = $('.test', this.shadowRoot).map(function() {
+            this.article = article;
+
+            return this.run();
+          });
+        }
+      });
+    })();
+  </script>
+</polymer-element>
