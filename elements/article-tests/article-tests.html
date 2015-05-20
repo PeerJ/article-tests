@@ -32,12 +32,8 @@
   <script>
     (function () {
       Polymer({
-        url: 'http://git.macropus.org/collapse-largest-herbivores/',
-        ready: function() {
-          //this.fetchArticle();
-        },
+        url: 'https://read-lab-confederation.github.io/nyc-subway-anthrax-study/',
         fetchArticle: function() {
-          //$(this.$.article).load(this.url, 'article', this.runTests.bind(this));
           $(this.$.article).load(this.url, 'article', function() {
             this.loaded = true;
           }.bind(this));
