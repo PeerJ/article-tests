@@ -10,7 +10,7 @@
       <ul class="description">
         <li>
           <span id="output">{{ capitalisation }}</span>
-          <span target="h1[itemprop=name]" link?="{{ finished }}"
+          <span target="h1" link?="{{ finished }}"
             on-tap="{{ showTarget }}">Verify that the title is correctly capitalised</span>
         </li>
       </ul>
@@ -21,7 +21,7 @@
       capitalisation: '…',
       finished: false,
       run: function() {
-        var title = $('h1[itemprop=name]', this.article).text();
+        var title = $('h1', this.article).text();
 
         this.capitalisation = this.testCapitalisation(title) ? '✔' : '⚠';
         this.finished = true;
