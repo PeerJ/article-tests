@@ -1,0 +1,14 @@
+:host {
+  display: block;
+  padding: 1rem;
+}
+
+::content h1 {
+  font-size: 120%;
+  font-weight: 200;
+}
+
+::content ul {
+  list-style-type: none;
+  padding-left: 0;
+}

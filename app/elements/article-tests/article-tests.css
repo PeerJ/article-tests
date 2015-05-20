@@ -1,0 +1,48 @@
+:host {
+  display: block;
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+}
+
+paper-input {
+  padding: 0 10px;
+}
+
+paper-button {
+  margin-top: 5px;
+  background-color: #272;
+  color: white;
+}
+
+paper-button:hover {
+  background-color: #494;
+}
+
+article {
+  font-family: 'Source Sans Pro', sans-serif;
+}
+
+article .highlight {
+  outline: 2px solid yellow;
+}
+
+#sidebar, #content {
+  position: absolute;
+  top: 0;
+  height: 100%;
+  overflow-y: auto;
+}
+
+#sidebar {
+  left: 0;
+  width: 30%;
+  background-color: #eee;
+}
+
+#content {
+  right: 0;
+  width: 70%;
+}
+
+#article {
+  padding: 2rem;
+}
